@@ -4,12 +4,28 @@ import { UserService } from "../services/UserService";
 
 class UserController {
     async CreateUser(request:Request, response:Response) {
-        const { firstName, lastName, email, admin } = request.body;
+        const { firstName, lastName, email,username,password, admin } = request.body;
 
         const userService = new UserService();
 
-        const user        = await userService.execute({ firstName, lastName, email, admin });
+        const user        = await userService.execute({ firstName, lastName, email,username,password, admin });
         
+        if (user["error"]) {
+            response.status(400);
+        }
+
+        return response.json(user);
+    }
+
+    async UpdateUser(request:Request, response:Response) {
+        const { email } = request.params;
+        const { firstName, lastName,username,password, admin } = request.body;
+        console.log(email);
+
+        const userService = new UserService();
+
+        const user = await userService.update({ firstName, lastName,email,username,password,  admin });
+
         if (user["error"]) {
             response.status(400);
         }
