@@ -8,11 +8,19 @@ interface IUserRequest {
     email: string;
     username: string;
     password: string;
+    address: string;
+    address_number: string;
+    district: string;
+    complement: string;
+    city: string;
+    state: string;
+    CEP: string;
+    phone_contact: string;
     admin?: boolean;
 }
 
 class UserService {
-    async execute({ firstName, lastName, email,username,password, admin } : IUserRequest){
+    async execute({ firstName, lastName, email,username,password,address,address_number,district,complement,city,state,CEP, phone_contact, admin } : IUserRequest){
         const usersRepository = getCustomRepository(UserRepositories);
         
         const  userExists = await usersRepository.findOne( {  email, });
@@ -33,10 +41,20 @@ class UserService {
             email,
             username,
             password: passwordHash,
+            address,
+            address_number,
+            district,
+            complement,
+            city,
+            state,
+            CEP,
+            phone_contact,
             admin
         });
 
         await usersRepository.save(user);
+        
+        user["password"] = undefined;
 
         return {
             error: false,
@@ -45,7 +63,7 @@ class UserService {
         };
     }
 
-    async update({ firstName, lastName, email,username,password, admin } : IUserRequest){
+    async update({ firstName, lastName, email,username,password,address,address_number,district,complement,city,state,CEP,phone_contact, admin } : IUserRequest){
         const usersRepository = getCustomRepository(UserRepositories);
         
         const  userExists = await usersRepository.findOne( {  email, });
@@ -58,14 +76,26 @@ class UserService {
             };            
         }        
 
+        const passwordHash = await hash(password, 8);
+
         userExists["firstName"] = firstName;
         userExists["lastName"]  = lastName;
         userExists["username"]  = username;
-        userExists["password"]  = password;
+        userExists["password"]  = passwordHash;
+        userExists["address"]   = address;
+        userExists["address_number"] = address_number;
+        userExists["district"]       = district;
+        userExists["complement"]     = complement;
+        userExists["city"]           = city;
+        userExists["state"]          = state;
+        userExists["CEP"]            = CEP;
+        userExists["phone_contact"]  = phone_contact;
         userExists["admin"]     = admin;
 
         const userUpdated = await usersRepository.save(userExists);
         
+        userUpdated["password"] = undefined;
+
         if (userUpdated) {
             return  {
                 error: false,
