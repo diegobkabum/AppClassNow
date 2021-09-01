@@ -14,24 +14,69 @@ export class CreateUsers1630349466091 implements MigrationInterface {
                     },
                     {
                         name:"firstName",
-                        type:"varchar"
+                        type:"varchar",
+                        length: "120"
                     },
                     {
                         name:"lastName",
-                        type:"varchar"
+                        type:"varchar",
+                        length: "120"
                     },
                     {
                         name:"email",
-                        type:"varchar"
+                        type:"varchar",
+                        length: "120"
                     },
                     {
                         name:"username",
-                        type:"varchar"
+                        type:"varchar",
+                        length: "80"
                     },
                     {
                         name:"password",
-                        type:"varchar"
+                        type:"varchar",
+                        length: "120"
                     },
+                    {
+                        name:"address",
+                        type:"varchar",
+                        length: "120"
+                    },
+                    {
+                        name:"address_number",
+                        type:"varchar",
+                        length: "6"
+                    },
+                    {
+                        name:"district",
+                        type:"varchar",
+                        length: "120"
+                    },
+                    {
+                        name:"complement",
+                        type:"varchar",
+                        length: "120"
+                    },
+                    {
+                        name:"city",
+                        type:"varchar",
+                        length: "120"
+                    },
+                    {
+                        name:"state",
+                        type:"varchar",
+                        length: "120"
+                    },
+                    {
+                        name:"CEP",
+                        type:"varchar",
+                        length: "120"
+                    },
+                    {
+                        name:"phone_contact",
+                        type:"varchar",
+                        length: "11"
+                    },                                                            
                     {
                         name:"admin",
                         type:"boolean",

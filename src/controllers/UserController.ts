@@ -4,11 +4,11 @@ import { UserService } from "../services/UserService";
 
 class UserController {
     async CreateUser(request:Request, response:Response) {
-        const { firstName, lastName, email,username,password, admin } = request.body;
+        const { firstName, lastName, email,username,password,address,address_number,district,complement,city,state,CEP,phone_contact, admin } = request.body;
 
         const userService = new UserService();
 
-        const user        = await userService.execute({ firstName, lastName, email,username,password, admin });
+        const user        = await userService.execute({ firstName, lastName, email,username,password,address,address_number,district,complement,city,state,CEP,phone_contact, admin });
         
         if (user["error"]) {
             response.status(400);
@@ -19,12 +19,11 @@ class UserController {
 
     async UpdateUser(request:Request, response:Response) {
         const { email } = request.params;
-        const { firstName, lastName,username,password, admin } = request.body;
-        console.log(email);
+        const { firstName, lastName,username,password,address,address_number,district,complement,city,state,CEP,phone_contact, admin } = request.body;
 
         const userService = new UserService();
 
-        const user = await userService.update({ firstName, lastName,email,username,password,  admin });
+        const user = await userService.update({ firstName, lastName,email,username,password,address,address_number,district,complement,city,state,CEP,phone_contact, admin });
 
         if (user["error"]) {
             response.status(400);
@@ -53,6 +52,10 @@ class UserController {
 
         const user = await userService.getAll();
 
+        user["data"].forEach(element => {
+            element.password = undefined;
+        });
+
         return response.json(user);
     }
 
@@ -68,6 +71,9 @@ class UserController {
         if (user["error"]) {
             response.status(400);
         }
+
+
+        user["data"].password = undefined;
 
         return response.json(user);
     }
