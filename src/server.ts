@@ -6,13 +6,23 @@ import { router } from "./router"
 
 import "./database";
 
-
+var morgan = require("morgan");
+const bodyParser = require('body-parser');
 const app = express();
+import swaggerUi from 'swagger-ui-express';
+
+const swaggerFile = require('./config/swagger_output')
+
+
 
 app.use(cors());
+app.use(morgan('combined'));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.json());
 
 app.use(router);
+
+app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
 app.use(
     (err: Error, request: Request, response: Response, next: NextFunction) => {
