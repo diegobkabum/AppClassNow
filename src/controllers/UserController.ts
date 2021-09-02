@@ -4,11 +4,11 @@ import { UserService } from "../services/UserService";
 
 class UserController {
     async CreateUser(request:Request, response:Response) {
-        const { firstName, lastName, email,username,password,address,address_number,district,complement,city,state,CEP,phone_contact, admin } = request.body;
+        const { first_name, last_name, email,username,password,address,address_number,district,complement,city,state,CEP,phone_contact, admin } = request.body;
 
         const userService = new UserService();
 
-        const user        = await userService.execute({ firstName, lastName, email,username,password,address,address_number,district,complement,city,state,CEP,phone_contact, admin });
+        const user        = await userService.execute({ first_name, last_name, email,username,password,address,address_number,district,complement,city,state,CEP,phone_contact, admin });
         
         if (user["error"]) {
             response.status(400);
@@ -19,11 +19,11 @@ class UserController {
 
     async UpdateUser(request:Request, response:Response) {
         const { email } = request.params;
-        const { firstName, lastName,username,password,address,address_number,district,complement,city,state,CEP,phone_contact, admin } = request.body;
+        const { first_name, last_name,username,password,address,address_number,district,complement,city,state,CEP,phone_contact, admin } = request.body;
 
         const userService = new UserService();
 
-        const user = await userService.update({ firstName, lastName,email,username,password,address,address_number,district,complement,city,state,CEP,phone_contact, admin });
+        const user = await userService.update({ first_name, last_name,email,username,password,address,address_number,district,complement,city,state,CEP,phone_contact, admin });
 
         if (user["error"]) {
             response.status(400);
@@ -34,7 +34,6 @@ class UserController {
 
     async DeleteUser(request:Request, response:Response) {
         const { email } = request.params;
-        console.log(email);
 
         const userService = new UserService();
 
@@ -60,9 +59,7 @@ class UserController {
     }
 
     async GetUserForEmail(request:Request, response:Response) {
-        console.log(request.query.email);
-
-        const { email }  = request.query;
+        const email   = request.query.email;
         
         const userService = new UserService();
 

@@ -13,12 +13,12 @@ export class CreateUsers1630349466091 implements MigrationInterface {
                         isPrimary:true                        
                     },
                     {
-                        name:"firstName",
+                        name:"first_name",
                         type:"varchar",
                         length: "120"
                     },
                     {
-                        name:"lastName",
+                        name:"last_name",
                         type:"varchar",
                         length: "120"
                     },
