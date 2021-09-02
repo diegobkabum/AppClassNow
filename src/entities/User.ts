@@ -11,10 +11,10 @@ class User {
     readonly id: string;
 
     @Column()
-    firstName: string;
+    first_name: string;
     
     @Column()
-    lastName: string;
+    last_name: string;
 
     @Column()
     email: string;
