@@ -3,8 +3,8 @@ import { UserRepositories } from "../repositories/UserRepositories";
 import { hash } from "bcryptjs";
 
 interface IUserRequest {
-    firstName: string;
-    lastName: string;
+    first_name: string;
+    last_name: string;
     email: string;
     username: string;
     password: string;
@@ -20,7 +20,7 @@ interface IUserRequest {
 }
 
 class UserService {
-    async execute({ firstName, lastName, email,username,password,address,address_number,district,complement,city,state,CEP, phone_contact, admin } : IUserRequest){
+    async execute({ first_name, last_name, email,username,password,address,address_number,district,complement,city,state,CEP, phone_contact, admin } : IUserRequest){
         const usersRepository = getCustomRepository(UserRepositories);
         
         const  userExists = await usersRepository.findOne( {  email, });
@@ -36,8 +36,8 @@ class UserService {
         const passwordHash = await hash(password, 8);
 
         const user = usersRepository.create({
-            firstName,
-            lastName,
+            first_name,
+            last_name,
             email,
             username,
             password: passwordHash,
@@ -63,7 +63,7 @@ class UserService {
         };
     }
 
-    async update({ firstName, lastName, email,username,password,address,address_number,district,complement,city,state,CEP,phone_contact, admin } : IUserRequest){
+    async update({ first_name, last_name, email,username,password,address,address_number,district,complement,city,state,CEP,phone_contact, admin } : IUserRequest){
         const usersRepository = getCustomRepository(UserRepositories);
         
         const  userExists = await usersRepository.findOne( {  email, });
@@ -78,8 +78,8 @@ class UserService {
 
         const passwordHash = await hash(password, 8);
 
-        userExists["firstName"] = firstName;
-        userExists["lastName"]  = lastName;
+        userExists["first_name"] = first_name;
+        userExists["last_name"]  = last_name;
         userExists["username"]  = username;
         userExists["password"]  = passwordHash;
         userExists["address"]   = address;
@@ -146,7 +146,7 @@ class UserService {
     async getAll() {
         const usersRepository = getCustomRepository(UserRepositories);
 
-        const users = await usersRepository.query("select * from users", null);
+        const users = await usersRepository.find();
 
         return {
             error: false,

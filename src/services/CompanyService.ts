@@ -132,7 +132,7 @@ class CompanyService {
     async getAll() {
         const companyRepository = getCustomRepository(CompanyRepositories);
 
-        const companys = await companyRepository.query("select * from company", null);
+        const companys = await companyRepository.find();
 
         return {
             error: false,
