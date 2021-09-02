@@ -10,7 +10,8 @@ export class CompanyCreate1630501857863 implements MigrationInterface {
                     {
                         name:"id",
                         type:"varchar",
-                        length:"36"
+                        length:"36",
+                        isPrimary: true
                     },
                     {
                         name:"corporate_name",
