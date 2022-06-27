@@ -4,10 +4,9 @@ import { UserController } from "./controllers/UserController";
 import { AuthenticateUserController } from "./controllers/AuthenticateUserController";
 import { CompanyController } from "./controllers/CompanyController";
 import { StudentController } from "./controllers/StudentController";
+import { UploadDocumentStudentController } from "./controllers/UploadDocumentStudentController";
 
 import { ensureAuthenticated } from "./midlewares/ensureAuthenticated";
-
-const  User  = require("./entities/User");
 
 const router = Router();
 
@@ -15,6 +14,10 @@ const userController             = new UserController();
 const authenticateUserController = new AuthenticateUserController();
 const companyController          = new CompanyController();
 const studentController          = new StudentController();
+const uploadDocumentController   = new UploadDocumentStudentController();
+
+const multer = require('multer');
+const upload = multer({ dest: 'uploads/' });
 
 //Rota Login e busca token
 router.post('/login', authenticateUserController.handle, (req, res) => {
@@ -33,7 +36,6 @@ router.post('/login', authenticateUserController.handle, (req, res) => {
         schema: {$ref: "#/definitions/Login" }
       }*/        
 });
-
 
 //Rotas usuários
 router.get('/users/all'    ,ensureAuthenticated  , userController.GetUsers, (req,res) => {/*
@@ -232,5 +234,8 @@ router.delete('/students/:id_user/:CPF' ,ensureAuthenticated  , studentControlle
         #swagger.tags  = ['Student']
     */
 });
+
+//Rotas upload document students
+router.post('/upload/documents/student', upload.single('foto'),ensureAuthenticated, uploadDocumentController.CreateUploadDocumentStudent);
 
 export { router };

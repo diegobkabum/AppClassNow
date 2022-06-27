@@ -13,8 +13,6 @@ import swaggerUi from 'swagger-ui-express';
 
 const swaggerFile = require('./config/swagger_output')
 
-
-
 app.use(cors());
 app.use(morgan('combined'));
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -37,6 +35,6 @@ app.use(
         message: "Internal Server Error",
       });
     }
-  );
+);
 
 app.listen(3000, () => console.log("Server is running...."));
