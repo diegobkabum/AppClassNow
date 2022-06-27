@@ -1,0 +1,589 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "v1",
+    "title": "API Class Now",
+    "description": "Documentation <b>ClassNow</b> module."
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "tags": [],
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "securityDefinitions": {
+    "api_key": {
+      "description": "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    }
+  },
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/login": {
+      "post": {
+        "tags": [
+          "Login"
+        ],
+        "description": "Route for user authentication.",
+        "parameters": [
+          {
+            "name": "data",
+            "description": "Email e password do usuario.",
+            "type": "object",
+            "required": true,
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Login"
+            }
+          }
+        ],
+        "responses": {}
+      }
+    },
+    "/users/all": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "description": "Busca todos os usuarios.",
+        "parameters": [],
+        "responses": {
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/users/user": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "description": "Busca usuario pelo email.",
+        "parameters": [
+          {
+            "name": "email",
+            "description": "Email do usuario.",
+            "type": "string",
+            "required": true,
+            "in": "query",
+            "example": "teste@gmail.com"
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/users": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "description": "incluir um usuario.",
+        "parameters": [
+          {
+            "name": "data",
+            "description": "Dados para inserir o usuario.",
+            "type": "object",
+            "required": true,
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/users/{email}": {
+      "put": {
+        "tags": [
+          "Users"
+        ],
+        "description": "alterar um usuario.",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Users"
+        ],
+        "description": "excluir um usuario.",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/companys/all": {
+      "get": {
+        "tags": [
+          "Companys"
+        ],
+        "description": "excluir um usuario.",
+        "parameters": [],
+        "responses": {
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/companys/company": {
+      "get": {
+        "tags": [
+          "Companys"
+        ],
+        "description": "buscar uma empresa pelo CNPJ.",
+        "parameters": [
+          {
+            "name": "CNPJ",
+            "description": "CNPJ da empresa.",
+            "type": "string",
+            "required": true,
+            "in": "query",
+            "example": "12555899000156"
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/companys": {
+      "post": {
+        "tags": [
+          "Companys"
+        ],
+        "description": "incluir uma empresa.",
+        "parameters": [
+          {
+            "name": "data",
+            "description": "Dados para inserir a empresa.",
+            "type": "object",
+            "required": true,
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Company"
+            }
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/companys/{CNPJ}": {
+      "put": {
+        "tags": [
+          "Companys"
+        ],
+        "description": "alterar uma empresa.",
+        "parameters": [
+          {
+            "name": "CNPJ",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Companys"
+        ],
+        "description": "excluir uma empresa.",
+        "parameters": [
+          {
+            "name": "CNPJ",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/students/all": {
+      "get": {
+        "tags": [
+          "Student"
+        ],
+        "description": "Buscar todos os alunos.",
+        "parameters": [],
+        "responses": {
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/students/student": {
+      "get": {
+        "tags": [
+          "Student"
+        ],
+        "description": "Buscar aluno pelo CPF e id_usuario.",
+        "parameters": [
+          {
+            "name": "CPF",
+            "description": "CPF do Aluno.",
+            "type": "string",
+            "required": true,
+            "in": "query",
+            "example": "55589866698"
+          },
+          {
+            "name": "id_user",
+            "description": "identificacao do usuario vinculado ao aluno.",
+            "type": "string",
+            "required": true,
+            "in": "query",
+            "example": "8ee3d82d-582-4321-357f-a5c444062310"
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/students/studentIdUser": {
+      "get": {
+        "tags": [
+          "Student"
+        ],
+        "description": "Buscar varios alunos vinculado pelo id_usuario.",
+        "parameters": [
+          {
+            "name": "id_user",
+            "description": "identificacao do usuario vinculado ao aluno.",
+            "type": "string",
+            "required": true,
+            "in": "query",
+            "example": "8ee3d82d-582-4321-357f-a5c444062310"
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/students": {
+      "post": {
+        "tags": [
+          "Student"
+        ],
+        "description": "incluir um aluno.",
+        "parameters": [
+          {
+            "name": "data",
+            "description": "Dados para inserir o aluno.",
+            "type": "object",
+            "required": true,
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Student"
+            }
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/students/{id_user}/{CPF}": {
+      "put": {
+        "tags": [
+          "Student"
+        ],
+        "description": "alterar um aluno.",
+        "parameters": [
+          {
+            "name": "id_user",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "CPF",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Student"
+        ],
+        "description": "excluir um aluno.",
+        "parameters": [
+          {
+            "name": "id_user",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "CPF",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Login": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "example": "string"
+        },
+        "password": {
+          "type": "string",
+          "example": "string"
+        }
+      },
+      "required": [
+        "email",
+        "password"
+      ]
+    },
+    "User": {
+      "type": "object",
+      "properties": {
+        "first_name": {
+          "type": "string",
+          "example": "string"
+        },
+        "last_name": {
+          "type": "string",
+          "example": "string"
+        },
+        "email": {
+          "type": "string",
+          "example": "string"
+        },
+        "username": {
+          "type": "string",
+          "example": "string"
+        },
+        "password": {
+          "type": "string",
+          "example": "string"
+        },
+        "address": {
+          "type": "string",
+          "example": "string"
+        },
+        "address_number": {
+          "type": "string",
+          "example": "string"
+        },
+        "district": {
+          "type": "string",
+          "example": " string"
+        },
+        "complement": {
+          "type": "string",
+          "example": "string"
+        },
+        "city": {
+          "type": "string",
+          "example": "string"
+        },
+        "state": {
+          "type": "string",
+          "example": "string"
+        },
+        "CEP": {
+          "type": "string",
+          "example": "string"
+        },
+        "phone_contact": {
+          "type": "string",
+          "example": "string"
+        },
+        "admin": {
+          "type": "string",
+          "example": "boolean"
+        }
+      },
+      "required": [
+        "first_name",
+        "last_name",
+        "email",
+        "username",
+        "password",
+        "address",
+        "address_number",
+        "district",
+        "complement",
+        "city",
+        "state",
+        "CEP",
+        "phone_contact",
+        "admin"
+      ]
+    },
+    "Company": {
+      "type": "object",
+      "properties": {
+        "corporate_name": {
+          "type": "string",
+          "example": "string"
+        },
+        "fantasy_name": {
+          "type": "string",
+          "example": "string"
+        },
+        "CNPJ": {
+          "type": "string",
+          "example": "string"
+        },
+        "address": {
+          "type": "string",
+          "example": "string"
+        },
+        "address_number": {
+          "type": "string",
+          "example": "string"
+        },
+        "district": {
+          "type": "string",
+          "example": "string"
+        },
+        "complement": {
+          "type": "string",
+          "example": "string"
+        },
+        "city": {
+          "type": "string",
+          "example": "string"
+        },
+        "state": {
+          "type": "string",
+          "example": "string"
+        },
+        "CEP": {
+          "type": "string",
+          "example": "string "
+        },
+        "phone_contact": {
+          "type": "string",
+          "example": "string"
+        },
+        "email_contact": {
+          "type": "string",
+          "example": "string"
+        }
+      }
+    },
+    "Student": {
+      "type": "object",
+      "properties": {
+        "id_user": {
+          "type": "string",
+          "example": "string"
+        },
+        "first_name": {
+          "type": "string",
+          "example": "string"
+        },
+        "last_name": {
+          "type": "string",
+          "example": "string"
+        },
+        "birth_date": {
+          "type": "string",
+          "example": "date"
+        },
+        "RG": {
+          "type": "string",
+          "example": "string"
+        },
+        "CPF": {
+          "type": "string",
+          "example": "string"
+        },
+        "class_student": {
+          "type": "string",
+          "example": "string"
+        }
+      }
+    }
+  },
+  "OpenAPI": "3.0.1",
+  "security": [
+    {
+      "api_key": []
+    }
+  ]
+}
